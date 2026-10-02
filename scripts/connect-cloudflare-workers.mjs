@@ -38,7 +38,7 @@ async function triggers(tag) {
   return r.data.result || [];
 }
 
-const all = await workers();
+// Ensure test Worker 114 exists before connecting triggers.\nlet all = await workers();\nif (!all.some(x => x.id === "114")) {\n  const form = new FormData();\n  form.append("metadata", new Blob([JSON.stringify({ main_module: "index.js", compatibility_date: "2026-10-02" })], { type: "application/json" }), "metadata.json");\n  form.append("index.js", new Blob([`export default { async fetch() { return new Response("Worker 114"); } };`], { type: "application/javascript+module" }), "index.js");\n  const res = await fetch(API + "/accounts/" + accountId + "/workers/scripts/114", { method: "PUT", headers: { Authorization: "Bearer " + token }, body: form });\n  const data = await res.json();\n  if (!res.ok || data.success === false) throw new Error("Could not create Worker 114: " + JSON.stringify(data.errors || data));\n  console.log("CREATED Worker 114");\n  all = await workers();\n}\n
 console.log("Workers found:", all.length);
 
 const reference = all.find(x => x.id === cfg.reference_worker);
