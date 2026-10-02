@@ -10,11 +10,7 @@ if (!accountId || !token) throw new Error("Cloudflare credentials are missing.")
 async function request(path, init = {}) {
   const res = await fetch(API + "/accounts/" + accountId + path, {
     ...init,
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-      ...(init.headers || {})
-    }
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json", ...(init.headers || {}) }
   });
   const data = await res.json();
   return { status: res.status, ok: res.ok && data.success !== false, data };
@@ -24,20 +20,13 @@ async function workers() {
   const out = [];
   let page = 1;
   while (true) {
-    const sep = "/workers/scripts".includes("?") ? "&" : "?";
-    const r = await request("/workers/scripts" + sep + "page=" + page + "&per_page=100");
-    if (!r.ok) throw new Error("Could not list Workers: " + JSON.stringify(r.data.errors));
+    const r = await request("/workers/scripts-search?page=" + page + "&per_page=100&order_by=name");
+    if (!r.ok) throw new Error("Could not search Workers: " + JSON.stringify(r.data.errors));
     const batch = r.data.result || [];
-    out.push(...batch);
+    out.push(...batch.map(x => ({ id: x.script_name, tag: x.id })));
     const info = r.data.result_info || {};
-    if (info.total_pages && page < info.total_pages) {
-      page++;
-      continue;
-    }
-    if (!info.total_pages && batch.length === 100) {
-      page++;
-      continue;
-    }
+    if (info.total_pages && page < info.total_pages) { page++; continue; }
+    if (!info.total_pages && batch.length === 100) { page++; continue; }
     break;
   }
   return [...new Map(out.map(w => [w.id, w])).values()];
@@ -57,25 +46,15 @@ if (!reference?.tag) throw new Error("Reference Worker 01 was not found.");
 
 const referenceTriggers = await triggers(reference.tag);
 const source = referenceTriggers.find(x => (x.branch_includes || []).includes(cfg.branch)) || referenceTriggers[0];
-
-if (!source?.repo_connection?.repo_connection_uuid || !source?.build_token_uuid) {
+if (!source?.repo_connection?.repo_connection_uuid || !source?.build_token_uuid)
   throw new Error("Worker 01 does not have a reusable GitHub Builds trigger.");
-}
 
 let created = 0, skipped = 0, failed = 0;
-
 for (const worker of all) {
   try {
-    if (!worker.tag) {
-      console.log("SKIP", worker.id, "no Worker tag");
-      skipped++;
-      continue;
-    }
     const current = await triggers(worker.tag);
     if (current.some(x => (x.branch_includes || []).includes(cfg.branch))) {
-      console.log("SKIP", worker.id, "production trigger already exists");
-      skipped++;
-      continue;
+      console.log("SKIP", worker.id, "production trigger already exists"); skipped++; continue;
     }
     const payload = {
       external_script_id: worker.tag,
@@ -92,24 +71,12 @@ for (const worker of all) {
       build_caching_enabled: cfg.build_caching_enabled
     };
     const r = await request("/builds/triggers", { method: "POST", body: JSON.stringify(payload) });
-    if (r.ok) {
-      console.log("OK", worker.id, "-> /" + worker.id);
-      created++;
-      continue;
-    }
+    if (r.ok) { console.log("OK", worker.id, "-> /" + worker.id); created++; continue; }
     const message = JSON.stringify(r.data.errors || r.data);
     if (r.status === 409 || /already|exist|conflict/i.test(message)) {
-      console.log("SKIP", worker.id, message);
-      skipped++;
-    } else {
-      console.log("FAIL", worker.id, message);
-      failed++;
-    }
-  } catch (err) {
-    console.log("FAIL", worker.id, err.message);
-    failed++;
-  }
+      console.log("SKIP", worker.id, message); skipped++;
+    } else { console.log("FAIL", worker.id, message); failed++; }
+  } catch (err) { console.log("FAIL", worker.id, err.message); failed++; }
 }
-
 console.log("DONE", { created, skipped, failed, total: all.length });
 if (failed) process.exitCode = 1;
