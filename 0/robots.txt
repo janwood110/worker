@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://0.0l0l.workers.dev/sitemap.xml

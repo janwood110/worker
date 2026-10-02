@@ -1,0 +1,50 @@
+name: Deploy Worker 0
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "0/**"
+      - ".github/workflows/deploy-worker-0.yml"
+permissions:
+  contents: read
+jobs:
+  deploy-worker-0:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Confirm Worker 0 already exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "47d4f4cea147d22cff242df8b0f44117"
+        run: |
+          node --input-type=module <<'NODE'
+          const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+          const token = process.env.CLOUDFLARE_API_TOKEN;
+          if (!accountId || !token) throw new Error("Cloudflare deployment credentials are missing.");
+          let page = 1;
+          let found = false;
+          while (true) {
+            const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/workers/scripts-search?page=${page}&per_page=100&order_by=name`;
+            const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+            const data = await response.json();
+            if (!response.ok || data.success === false) throw new Error("Could not verify the existing Worker 0.");
+            const batch = data.result || [];
+            if (batch.some(worker => worker.script_name === "0")) { found = true; break; }
+            const info = data.result_info || {};
+            const hasNext = info.total_pages ? page < info.total_pages : batch.length === 100;
+            if (!hasNext) break;
+            page++;
+          }
+          if (!found) throw new Error("Worker 0 is absent in the configured Cloudflare account; refusing to create a Worker.");
+          console.log("Confirmed existing Worker 0. Deploy may proceed.");
+          NODE
+      - name: Deploy only Worker 0
+        working-directory: ./0
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "47d4f4cea147d22cff242df8b0f44117"
+        run: npx --yes wrangler deploy
