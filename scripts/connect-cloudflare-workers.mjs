@@ -72,6 +72,12 @@ if (!all.some(x => x.id === "114")) {
 }
 
 console.log("Workers found:", all.length);
+console.log("=== FULL WORKER LIST ===");
+all
+  .map(x => x.id)
+  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }))
+  .forEach((name, i) => console.log(String(i + 1).padStart(3, "0") + ". " + name));
+console.log("=== END WORKER LIST ===");
 
 const reference = all.find(x => x.id === cfg.reference_worker);
 if (!reference?.tag) throw new Error("Reference Worker 01 was not found.");
