@@ -21,9 +21,26 @@ async function request(path, init = {}) {
 }
 
 async function workers() {
-  const r = await request("/workers/scripts");
-  if (!r.ok) throw new Error("Could not list Workers: " + JSON.stringify(r.data.errors));
-  return r.data.result || [];
+  const out = [];
+  let page = 1;
+  while (true) {
+    const sep = "/workers/scripts".includes("?") ? "&" : "?";
+    const r = await request("/workers/scripts" + sep + "page=" + page + "&per_page=100");
+    if (!r.ok) throw new Error("Could not list Workers: " + JSON.stringify(r.data.errors));
+    const batch = r.data.result || [];
+    out.push(...batch);
+    const info = r.data.result_info || {};
+    if (info.total_pages && page < info.total_pages) {
+      page++;
+      continue;
+    }
+    if (!info.total_pages && batch.length === 100) {
+      page++;
+      continue;
+    }
+    break;
+  }
+  return [...new Map(out.map(w => [w.id, w])).values()];
 }
 
 async function triggers(tag) {
@@ -45,9 +62,7 @@ if (!source?.repo_connection?.repo_connection_uuid || !source?.build_token_uuid)
   throw new Error("Worker 01 does not have a reusable GitHub Builds trigger.");
 }
 
-let created = 0;
-let skipped = 0;
-let failed = 0;
+let created = 0, skipped = 0, failed = 0;
 
 for (const worker of all) {
   try {
@@ -56,14 +71,12 @@ for (const worker of all) {
       skipped++;
       continue;
     }
-
     const current = await triggers(worker.tag);
     if (current.some(x => (x.branch_includes || []).includes(cfg.branch))) {
       console.log("SKIP", worker.id, "production trigger already exists");
       skipped++;
       continue;
     }
-
     const payload = {
       external_script_id: worker.tag,
       repo_connection_uuid: source.repo_connection.repo_connection_uuid,
@@ -78,18 +91,12 @@ for (const worker of all) {
       path_excludes: cfg.path_excludes,
       build_caching_enabled: cfg.build_caching_enabled
     };
-
-    const r = await request("/builds/triggers", {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
-
+    const r = await request("/builds/triggers", { method: "POST", body: JSON.stringify(payload) });
     if (r.ok) {
       console.log("OK", worker.id, "-> /" + worker.id);
       created++;
       continue;
     }
-
     const message = JSON.stringify(r.data.errors || r.data);
     if (r.status === 409 || /already|exist|conflict/i.test(message)) {
       console.log("SKIP", worker.id, message);
