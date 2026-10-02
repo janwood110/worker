@@ -1,0 +1,100 @@
+name: Deploy Nobari185 remaining 184 Workers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deploy/remaining-184/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-remaining-184:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify exact 184 existing Worker names before deployment
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "47d4f4cea147d22cff242df8b0f44117"
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const names = fs.readFileSync("deploy/remaining-184/workers.txt", "utf8").trim().split(/\r?\n/);
+          if (names.length !== 184 || new Set(names).size !== 184 || names.includes("0")) {
+            throw new Error(`Expected exactly 184 unique workers excluding 0; found ${names.length}.`);
+          }
+          const token = process.env.CLOUDFLARE_API_TOKEN;
+          const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+          if (!token || !accountId) throw new Error("Cloudflare deployment credentials are missing.");
+          const found = new Set();
+          let page = 1;
+          while (true) {
+            const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/workers/scripts-search?page=${page}&per_page=100&order_by=name`;
+            const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+            const data = await response.json();
+            if (!response.ok || data.success === false) throw new Error(`Could not verify existing Workers (page ${page}).`);
+            for (const worker of data.result || []) found.add(worker.script_name);
+            const info = data.result_info || {};
+            const hasNext = info.total_pages ? page < info.total_pages : (data.result || []).length === 100;
+            if (!hasNext) break;
+            page++;
+          }
+          const missing = names.filter(name => !found.has(name));
+          if (missing.length) throw new Error(`Refusing deployment; these Worker names do not already exist: ${missing.join(", ")}`);
+          console.log(`Confirmed all ${names.length} requested Workers already exist; Worker 0 is excluded.`);
+          NODE
+      - name: Reassemble and verify source package
+        run: |
+          cat deploy/remaining-184/remaining184.tar.gz.part-* > /tmp/nobari185-remaining-184.tar.gz
+          tar -tzf /tmp/nobari185-remaining-184.tar.gz >/dev/null
+          mkdir -p /tmp/nobari185-remaining-184
+          tar -xzf /tmp/nobari185-remaining-184.tar.gz -C /tmp/nobari185-remaining-184
+      - name: Deploy only the 184 listed Workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "47d4f4cea147d22cff242df8b0f44117"
+        run: |
+          set +e
+          failures=""
+          count=0
+          while IFS= read -r worker; do
+            [ -n "$worker" ] || continue
+            count=$((count + 1))
+            site="/tmp/nobari185-remaining-184/$worker"
+            if [ "$worker" = "0" ] || [ ! -f "$site/wrangler.jsonc" ] || [ ! -f "$site/index.html" ]; then
+              echo "SKIP unsafe or incomplete target: $worker"
+              failures="$failures $worker"
+              continue
+            fi
+            if ! grep -Fq "\"name\": \"$worker\"" "$site/wrangler.jsonc"; then
+              echo "SKIP name mismatch: $worker"
+              failures="$failures $worker"
+              continue
+            fi
+            printf '.wrangler/\nwrangler.jsonc\n' > "$site/.assetsignore"
+            echo "Deploying existing Worker $worker"
+            (cd "$site" && npx --yes wrangler deploy --config wrangler.jsonc)
+            result=$?
+            if [ $result -ne 0 ]; then
+              echo "FAILED: $worker (exit $result)"
+              failures="$failures $worker"
+            else
+              echo "DEPLOYED: $worker"
+            fi
+          done < deploy/remaining-184/workers.txt
+          if [ "$count" -ne 184 ]; then
+            echo "Expected 184 Worker entries; processed $count."
+            exit 1
+          fi
+          if [ -n "$failures" ]; then
+            echo "Workers requiring retry:$failures"
+            exit 1
+          fi
+          echo "Successfully deployed all 184 Workers; Worker 0 was not in the target set."
