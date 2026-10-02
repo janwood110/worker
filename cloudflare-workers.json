@@ -1,0 +1,11 @@
+{
+  "reference_worker": "01",
+  "branch": "main",
+  "deploy_command": "npx wrangler deploy",
+  "build_command": "",
+  "root_directory_mode": "worker-name",
+  "path_includes": ["*"],
+  "path_excludes": ["node_modules/**", ".git/**"],
+  "build_caching_enabled": true,
+  "trigger_name": "Deploy production"
+}
