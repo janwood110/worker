@@ -1,0 +1,108 @@
+import fs from "node:fs/promises";
+
+const API = "https://api.cloudflare.com/client/v4";
+const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+const token = process.env.CLOUDFLARE_API_TOKEN;
+const cfg = JSON.parse(await fs.readFile("cloudflare-workers.json", "utf8"));
+
+if (!accountId || !token) throw new Error("Cloudflare credentials are missing.");
+
+async function request(path, init = {}) {
+  const res = await fetch(API + "/accounts/" + accountId + path, {
+    ...init,
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      ...(init.headers || {})
+    }
+  });
+  const data = await res.json();
+  return { status: res.status, ok: res.ok && data.success !== false, data };
+}
+
+async function workers() {
+  const r = await request("/workers/scripts");
+  if (!r.ok) throw new Error("Could not list Workers: " + JSON.stringify(r.data.errors));
+  return r.data.result || [];
+}
+
+async function triggers(tag) {
+  const r = await request("/builds/workers/" + encodeURIComponent(tag) + "/triggers");
+  if (!r.ok) throw new Error("Could not list triggers for tag " + tag + ": " + JSON.stringify(r.data.errors));
+  return r.data.result || [];
+}
+
+const all = await workers();
+console.log("Workers found:", all.length);
+
+const reference = all.find(x => x.id === cfg.reference_worker);
+if (!reference?.tag) throw new Error("Reference Worker 01 was not found.");
+
+const referenceTriggers = await triggers(reference.tag);
+const source = referenceTriggers.find(x => (x.branch_includes || []).includes(cfg.branch)) || referenceTriggers[0];
+
+if (!source?.repo_connection?.repo_connection_uuid || !source?.build_token_uuid) {
+  throw new Error("Worker 01 does not have a reusable GitHub Builds trigger.");
+}
+
+let created = 0;
+let skipped = 0;
+let failed = 0;
+
+for (const worker of all) {
+  try {
+    if (!worker.tag) {
+      console.log("SKIP", worker.id, "no Worker tag");
+      skipped++;
+      continue;
+    }
+
+    const current = await triggers(worker.tag);
+    if (current.some(x => (x.branch_includes || []).includes(cfg.branch))) {
+      console.log("SKIP", worker.id, "production trigger already exists");
+      skipped++;
+      continue;
+    }
+
+    const payload = {
+      external_script_id: worker.tag,
+      repo_connection_uuid: source.repo_connection.repo_connection_uuid,
+      build_token_uuid: source.build_token_uuid,
+      trigger_name: cfg.trigger_name,
+      build_command: cfg.build_command,
+      deploy_command: cfg.deploy_command,
+      root_directory: "/" + worker.id,
+      branch_includes: [cfg.branch],
+      branch_excludes: [],
+      path_includes: cfg.path_includes,
+      path_excludes: cfg.path_excludes,
+      build_caching_enabled: cfg.build_caching_enabled
+    };
+
+    const r = await request("/builds/triggers", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    if (r.ok) {
+      console.log("OK", worker.id, "-> /" + worker.id);
+      created++;
+      continue;
+    }
+
+    const message = JSON.stringify(r.data.errors || r.data);
+    if (r.status === 409 || /already|exist|conflict/i.test(message)) {
+      console.log("SKIP", worker.id, message);
+      skipped++;
+    } else {
+      console.log("FAIL", worker.id, message);
+      failed++;
+    }
+  } catch (err) {
+    console.log("FAIL", worker.id, err.message);
+    failed++;
+  }
+}
+
+console.log("DONE", { created, skipped, failed, total: all.length });
+if (failed) process.exitCode = 1;
