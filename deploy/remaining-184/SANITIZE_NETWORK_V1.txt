@@ -1,2 +1,3 @@
 Trigger deployment that removes the 1000-site network block from all 184 remaining Nobari185 Workers.
 Run HTML-only sanitization after workflow fix.
+Retry with variable-size fixed-network heading support.
