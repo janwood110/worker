@@ -56,6 +56,49 @@ jobs:
           tar -tzf /tmp/nobari185-remaining-184.tar.gz >/dev/null
           mkdir -p /tmp/nobari185-remaining-184
           tar -xzf /tmp/nobari185-remaining-184.tar.gz -C /tmp/nobari185-remaining-184
+
+      - name: Remove 1000-site network blocks before deployment
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import path from "node:path";
+
+          const base = "/tmp/nobari185-remaining-184";
+          const names = fs.readFileSync("deploy/remaining-184/workers.txt", "utf8").trim().split(/\r?\n/);
+          if (names.length !== 184) throw new Error(`Expected 184 workers; found ${names.length}.`);
+
+          const htmlRe = /<h2>\s*شبکه ثابت ۱۰۰۰ سایت\s*<\/h2>\s*<ul>[\s\S]*?<\/ul>\s*/;
+          const mdRe = /^##\s*شبکه ثابت ۱۰۰۰ سایت\s*[\s\S]*$/m;
+
+          let htmlChanged = 0;
+          let mdChanged = 0;
+
+          for (const worker of names) {
+            const dir = path.join(base, worker);
+            const htmlPath = path.join(dir, "index.html");
+            if (!fs.existsSync(htmlPath)) throw new Error(`Missing index.html for ${worker}`);
+
+            let html = fs.readFileSync(htmlPath, "utf8");
+            if (!htmlRe.test(html)) throw new Error(`Network block not found in ${worker}/index.html`);
+            html = html.replace(htmlRe, "");
+            if (html.includes("شبکه ثابت ۱۰۰۰ سایت")) throw new Error(`Network marker still present in ${worker}/index.html`);
+            fs.writeFileSync(htmlPath, html, "utf8");
+            htmlChanged++;
+
+            const mdPath = path.join(dir, "article.md");
+            if (fs.existsSync(mdPath)) {
+              let md = fs.readFileSync(mdPath, "utf8");
+              if (mdRe.test(md)) {
+                md = md.replace(mdRe, "").replace(/\s+$/, "\n");
+                fs.writeFileSync(mdPath, md, "utf8");
+                mdChanged++;
+              }
+            }
+          }
+
+          if (htmlChanged !== 184) throw new Error(`Expected to sanitize 184 HTML files; sanitized ${htmlChanged}.`);
+          console.log(`Removed 1000-site network block from ${htmlChanged} HTML files and ${mdChanged} article.md files.`);
+          NODE
       - name: Deploy only the 184 listed Workers
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
