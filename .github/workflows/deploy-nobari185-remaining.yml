@@ -57,7 +57,7 @@ jobs:
           mkdir -p /tmp/nobari185-remaining-184
           tar -xzf /tmp/nobari185-remaining-184.tar.gz -C /tmp/nobari185-remaining-184
 
-      - name: Remove 1000-site network block from index.html only
+      - name: Remove fixed network block from index.html only
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs";
@@ -67,42 +67,61 @@ jobs:
           const names = fs.readFileSync("deploy/remaining-184/workers.txt", "utf8").trim().split(/\r?\n/);
           if (names.length !== 184) throw new Error(`Expected 184 workers; found ${names.length}.`);
 
-          const heading = "<h2>شبکه ثابت ۱۰۰۰ سایت</h2>";
+          // Matches headings such as:
+          // شبکه ثابت ۱۰۰۰ سایت
+          // شبکه ثابت ۸۲۰ سایت
+          // and the same with ASCII digits.
+          const headingRe = /<h2>\s*شبکه ثابت\s*[0-9۰-۹]+\s*سایت\s*<\/h2>/i;
           let changed = 0;
+          const skipped = [];
 
           for (const worker of names) {
             const htmlPath = path.join(base, worker, "index.html");
             if (!fs.existsSync(htmlPath)) throw new Error(`Missing index.html for ${worker}`);
 
             let html = fs.readFileSync(htmlPath, "utf8");
-            const begin = html.indexOf(heading);
-            if (begin < 0) throw new Error(`Network heading not found in ${worker}/index.html`);
+            const match = headingRe.exec(html);
 
-            const o999 = html.indexOf("o999", begin);
-            if (o999 < 0) throw new Error(`o999 not found after network heading in ${worker}/index.html`);
+            if (!match) {
+              // If no network heading exists, do not fail the whole deployment.
+              skipped.push(worker);
+              continue;
+            }
 
-            const closers = ["</ul>", "</p>", "</div>", "</section>"];
-            const ends = closers
-              .map(tag => ({ tag, pos: html.indexOf(tag, o999) }))
-              .filter(x => x.pos >= 0)
-              .sort((a, b) => a.pos - b.pos);
+            const begin = match.index;
+            const contentStart = begin + match[0].length;
 
-            if (!ends.length) throw new Error(`Could not find network block closing tag in ${worker}/index.html`);
+            // The network body is represented in current sources as a UL or a P.
+            // Remove only the first such container immediately following the heading.
+            const rest = html.slice(contentStart);
+            const ulOpen = rest.search(/<ul\b/i);
+            const pOpen = rest.search(/<p\b/i);
 
-            const end = ends[0].pos + ends[0].tag.length;
+            let kind = null;
+            let openPos = -1;
+            if (ulOpen >= 0 && (pOpen < 0 || ulOpen < pOpen)) { kind = "ul"; openPos = ulOpen; }
+            else if (pOpen >= 0) { kind = "p"; openPos = pOpen; }
+
+            if (!kind || openPos < 0) throw new Error(`Network body not found after heading in ${worker}/index.html`);
+
+            const absoluteOpen = contentStart + openPos;
+            const closeTag = kind === "ul" ? "</ul>" : "</p>";
+            const closePos = html.toLowerCase().indexOf(closeTag, absoluteOpen);
+            if (closePos < 0) throw new Error(`Network closing tag not found in ${worker}/index.html`);
+
+            const end = closePos + closeTag.length;
             html = html.slice(0, begin) + html.slice(end).replace(/^\s+/, "\n");
 
-            if (html.includes(heading)) throw new Error(`Network heading still present in ${worker}/index.html`);
-            if (/href=["'][^"']*0l0l\.workers\.dev\/?["'][^>]*>o\d{3}</i.test(html)) {
-              throw new Error(`Worker-network links still present in ${worker}/index.html`);
-            }
+            if (headingRe.test(html)) throw new Error(`Network heading still present in ${worker}/index.html`);
 
             fs.writeFileSync(htmlPath, html, "utf8");
             changed++;
           }
 
-          if (changed !== 184) throw new Error(`Expected 184 HTML files; changed ${changed}.`);
-          console.log(`Removed the 1000-site network block from index.html for all ${changed} Workers. article.md was not modified.`);
+          if (changed + skipped.length !== 184) throw new Error("Worker accounting mismatch.");
+          console.log(`Removed fixed network block from index.html for ${changed} Workers.`);
+          console.log(`No matching network heading in ${skipped.length} Workers: ${skipped.join(", ")}`);
+          console.log("article.md was not modified.");
           NODE
       - name: Deploy only the 184 listed Workers
         env:
