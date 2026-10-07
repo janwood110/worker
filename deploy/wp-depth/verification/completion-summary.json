@@ -1,0 +1,45 @@
+{
+  "completedAt": "2026-10-07T07:25:23.869Z",
+  "scope": "Scientific article bodies only",
+  "publishedScienceArticles": 398,
+  "workers": {
+    "sourcePackages": 185,
+    "liveScienceArticles": 184,
+    "passed": 184,
+    "failures": [],
+    "excluded": [
+      {
+        "name": "01",
+        "url": "https://01.0l0l.workers.dev/?science-verification=20261007",
+        "reason": "Current live endpoint is an image test without an article. Its existing title and image were preserved."
+      }
+    ],
+    "mathCorrections": [
+      {
+        "name": "00989120074089",
+        "url": "https://00989120074089.0l0l.workers.dev/",
+        "verifiedAt": "2026-10-07T07:05:18.968Z",
+        "correction": "Repair malformed logarithm command in the scientific body only",
+        "protectedFieldsUnchanged": true,
+        "beforeSha256": "b34907e9b08f811acad13b3095f692d6900f5e469ef1650a0cd82b0561f4aa28",
+        "afterSha256": "deb1c01adb36e1a7a8b3885abd260850191c7750b7cd9d9be48abec57a42c3c8"
+      }
+    ]
+  },
+  "wordpress": {
+    "articles": 214,
+    "passed": 214,
+    "publicBodyConfirmed": 214,
+    "apiBodyConfirmed": 214,
+    "authenticatedPublicationProofs": 183,
+    "authenticatedCurrentRereads": 32,
+    "additionalContextBridgeProofs": 10,
+    "contextBridges": 20,
+    "failures": [],
+    "errors": [],
+    "noindexDetected": 0
+  },
+  "protectedFields": "Images, H1, title, descriptions, author names preserved; article body updates only",
+  "report": "deploy/wp-depth/verification/completion-report.md",
+  "publicVerificationWorkflow": "https://github.com/janwood110/worker/actions/runs/37586856082"
+}
