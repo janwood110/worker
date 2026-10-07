@@ -1,11 +1,15 @@
 {
-  "verifiedAt": "2026-10-07T06:44:59.525Z",
+  "verifiedAt": "2026-10-07T06:56:47.598Z",
   "total": 185,
+  "sciencePages": 184,
   "passed": 184,
-  "failures": [
+  "excluded": [
     {
       "name": "01",
       "url": "https://01.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": true,
+      "exclusionReason": "Current live endpoint is an image test without an article. Its existing title and image were preserved.",
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://01.0l0l.workers.dev/?science-verification=20261007",
       "missingBodySample": "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>01 test</title><style>html,body{margin:0;height:100%;background:#111}img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}</style></head><body><img src=\"/test-first-image.jpg\" alt=\"\"></body></html>",
@@ -23,10 +27,13 @@
       "sha256": "268fe15b2dc34a94b0806f1375739d9cbe10e66b9bd9a774d8dc2502931d393b"
     }
   ],
+  "failures": [],
   "results": [
     {
       "name": "0",
       "url": "https://0.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://0.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 56772,
@@ -45,6 +52,8 @@
     {
       "name": "00",
       "url": "https://00.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 54901,
@@ -63,6 +72,8 @@
     {
       "name": "000",
       "url": "https://000.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://000.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52262,
@@ -81,6 +92,8 @@
     {
       "name": "0000",
       "url": "https://0000.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://0000.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 53217,
@@ -99,6 +112,8 @@
     {
       "name": "00000",
       "url": "https://00000.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00000.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45023,
@@ -117,6 +132,8 @@
     {
       "name": "00989112277224",
       "url": "https://00989112277224.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00989112277224.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 51909,
@@ -135,6 +152,10 @@
     {
       "name": "00989120074089",
       "url": "https://00989120074089.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [
+        "از نقاط تصادفی پوشش داده شود. در شرایط regularity، خطا می‌تواند نزدیک (O(N^{-1}(\\گزارش N)^d)) باشد. این bound در d بالا ظاهراً بد است، ولی در مسائل با مؤثر بُعد پایین QMC عملکرد عالی دارد.</p>"
+      ],
       "status": 200,
       "finalUrl": "https://00989120074089.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 51024,
@@ -153,6 +174,8 @@
     {
       "name": "00989121232690",
       "url": "https://00989121232690.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00989121232690.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43407,
@@ -171,6 +194,8 @@
     {
       "name": "00989128901889",
       "url": "https://00989128901889.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00989128901889.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49000,
@@ -189,6 +214,8 @@
     {
       "name": "00995522224490",
       "url": "https://00995522224490.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00995522224490.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49802,
@@ -207,6 +234,8 @@
     {
       "name": "00995599559073",
       "url": "https://00995599559073.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://00995599559073.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 31411,
@@ -225,6 +254,9 @@
     {
       "name": "01",
       "url": "https://01.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": true,
+      "exclusionReason": "Current live endpoint is an image test without an article. Its existing title and image were preserved.",
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://01.0l0l.workers.dev/?science-verification=20261007",
       "missingBodySample": "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>01 test</title><style>html,body{margin:0;height:100%;background:#111}img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}</style></head><body><img src=\"/test-first-image.jpg\" alt=\"\"></body></html>",
@@ -244,6 +276,8 @@
     {
       "name": "02",
       "url": "https://02.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://02.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52741,
@@ -262,6 +296,8 @@
     {
       "name": "03",
       "url": "https://03.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://03.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 53784,
@@ -280,6 +316,8 @@
     {
       "name": "04",
       "url": "https://04.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://04.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 33188,
@@ -298,6 +336,8 @@
     {
       "name": "05",
       "url": "https://05.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://05.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 32625,
@@ -316,6 +356,8 @@
     {
       "name": "06",
       "url": "https://06.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://06.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 38527,
@@ -334,6 +376,8 @@
     {
       "name": "07",
       "url": "https://07.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://07.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 29439,
@@ -352,6 +396,8 @@
     {
       "name": "08",
       "url": "https://08.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://08.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43936,
@@ -370,6 +416,8 @@
     {
       "name": "09",
       "url": "https://09.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://09.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43992,
@@ -388,6 +436,8 @@
     {
       "name": "1",
       "url": "https://1.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://1.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 50220,
@@ -406,6 +456,8 @@
     {
       "name": "10",
       "url": "https://10.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://10.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45642,
@@ -424,6 +476,8 @@
     {
       "name": "100",
       "url": "https://100.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://100.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46665,
@@ -442,6 +496,8 @@
     {
       "name": "101",
       "url": "https://101.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://101.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42825,
@@ -460,6 +516,8 @@
     {
       "name": "11",
       "url": "https://11.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://11.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45423,
@@ -478,6 +536,8 @@
     {
       "name": "110",
       "url": "https://110.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://110.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49446,
@@ -496,6 +556,8 @@
     {
       "name": "111",
       "url": "https://111.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://111.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 35510,
@@ -514,6 +576,8 @@
     {
       "name": "112",
       "url": "https://112.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://112.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 65669,
@@ -532,6 +596,8 @@
     {
       "name": "113",
       "url": "https://113.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://113.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 48801,
@@ -550,6 +616,8 @@
     {
       "name": "114",
       "url": "https://114.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://114.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46585,
@@ -568,6 +636,8 @@
     {
       "name": "115",
       "url": "https://115.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://115.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52913,
@@ -586,6 +656,8 @@
     {
       "name": "12",
       "url": "https://12.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://12.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52416,
@@ -604,6 +676,8 @@
     {
       "name": "13",
       "url": "https://13.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://13.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47228,
@@ -622,6 +696,8 @@
     {
       "name": "14",
       "url": "https://14.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://14.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 51228,
@@ -640,6 +716,8 @@
     {
       "name": "15",
       "url": "https://15.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://15.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 38041,
@@ -658,6 +736,8 @@
     {
       "name": "16",
       "url": "https://16.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://16.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 50094,
@@ -676,6 +756,8 @@
     {
       "name": "17",
       "url": "https://17.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://17.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46357,
@@ -694,6 +776,8 @@
     {
       "name": "18",
       "url": "https://18.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://18.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 50271,
@@ -712,6 +796,8 @@
     {
       "name": "1889",
       "url": "https://1889.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://1889.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 29618,
@@ -730,6 +816,8 @@
     {
       "name": "19",
       "url": "https://19.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://19.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 35373,
@@ -748,6 +836,8 @@
     {
       "name": "2",
       "url": "https://2.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://2.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45703,
@@ -766,6 +856,8 @@
     {
       "name": "20",
       "url": "https://20.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://20.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 33328,
@@ -784,6 +876,8 @@
     {
       "name": "200",
       "url": "https://200.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://200.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42781,
@@ -802,6 +896,8 @@
     {
       "name": "202",
       "url": "https://202.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://202.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 36499,
@@ -820,6 +916,8 @@
     {
       "name": "21",
       "url": "https://21.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://21.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 35060,
@@ -838,6 +936,8 @@
     {
       "name": "22",
       "url": "https://22.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://22.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 33217,
@@ -856,6 +956,8 @@
     {
       "name": "220",
       "url": "https://220.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://220.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 39996,
@@ -874,6 +976,8 @@
     {
       "name": "222",
       "url": "https://222.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://222.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44612,
@@ -892,6 +996,8 @@
     {
       "name": "23",
       "url": "https://23.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://23.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44313,
@@ -910,6 +1016,8 @@
     {
       "name": "24",
       "url": "https://24.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://24.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44979,
@@ -928,6 +1036,8 @@
     {
       "name": "25",
       "url": "https://25.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://25.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47010,
@@ -946,6 +1056,8 @@
     {
       "name": "26",
       "url": "https://26.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://26.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 30675,
@@ -964,6 +1076,8 @@
     {
       "name": "27",
       "url": "https://27.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://27.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46445,
@@ -982,6 +1096,8 @@
     {
       "name": "28",
       "url": "https://28.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://28.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 56451,
@@ -1000,6 +1116,8 @@
     {
       "name": "29",
       "url": "https://29.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://29.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43124,
@@ -1018,6 +1136,8 @@
     {
       "name": "3",
       "url": "https://3.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://3.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44696,
@@ -1036,6 +1156,8 @@
     {
       "name": "30",
       "url": "https://30.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://30.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45827,
@@ -1054,6 +1176,8 @@
     {
       "name": "300",
       "url": "https://300.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://300.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43869,
@@ -1072,6 +1196,8 @@
     {
       "name": "303",
       "url": "https://303.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://303.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46303,
@@ -1090,6 +1216,8 @@
     {
       "name": "31",
       "url": "https://31.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://31.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 39702,
@@ -1108,6 +1236,8 @@
     {
       "name": "32",
       "url": "https://32.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://32.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 34883,
@@ -1126,6 +1256,8 @@
     {
       "name": "33",
       "url": "https://33.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://33.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 54466,
@@ -1144,6 +1276,8 @@
     {
       "name": "330",
       "url": "https://330.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://330.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41927,
@@ -1162,6 +1296,8 @@
     {
       "name": "333",
       "url": "https://333.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://333.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 34454,
@@ -1180,6 +1316,8 @@
     {
       "name": "34",
       "url": "https://34.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://34.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52318,
@@ -1198,6 +1336,8 @@
     {
       "name": "35",
       "url": "https://35.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://35.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 50821,
@@ -1216,6 +1356,8 @@
     {
       "name": "36",
       "url": "https://36.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://36.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47164,
@@ -1234,6 +1376,8 @@
     {
       "name": "37",
       "url": "https://37.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://37.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47376,
@@ -1252,6 +1396,8 @@
     {
       "name": "38",
       "url": "https://38.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://38.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44911,
@@ -1270,6 +1416,8 @@
     {
       "name": "39",
       "url": "https://39.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://39.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42844,
@@ -1288,6 +1436,8 @@
     {
       "name": "4",
       "url": "https://4.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://4.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41457,
@@ -1306,6 +1456,8 @@
     {
       "name": "40",
       "url": "https://40.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://40.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 48738,
@@ -1324,6 +1476,8 @@
     {
       "name": "400",
       "url": "https://400.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://400.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 40918,
@@ -1342,6 +1496,8 @@
     {
       "name": "404",
       "url": "https://404.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://404.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 33756,
@@ -1360,6 +1516,8 @@
     {
       "name": "41",
       "url": "https://41.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://41.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 33791,
@@ -1378,6 +1536,8 @@
     {
       "name": "42",
       "url": "https://42.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://42.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47081,
@@ -1396,6 +1556,8 @@
     {
       "name": "43",
       "url": "https://43.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://43.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52233,
@@ -1414,6 +1576,8 @@
     {
       "name": "44",
       "url": "https://44.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://44.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47470,
@@ -1432,6 +1596,8 @@
     {
       "name": "440",
       "url": "https://440.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://440.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42875,
@@ -1450,6 +1616,8 @@
     {
       "name": "444",
       "url": "https://444.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://444.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45809,
@@ -1468,6 +1636,8 @@
     {
       "name": "45",
       "url": "https://45.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://45.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 51560,
@@ -1486,6 +1656,8 @@
     {
       "name": "46",
       "url": "https://46.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://46.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 48774,
@@ -1504,6 +1676,8 @@
     {
       "name": "47",
       "url": "https://47.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://47.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47219,
@@ -1522,6 +1696,8 @@
     {
       "name": "48",
       "url": "https://48.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://48.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 39418,
@@ -1540,6 +1716,8 @@
     {
       "name": "49",
       "url": "https://49.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://49.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 54120,
@@ -1558,6 +1736,8 @@
     {
       "name": "5",
       "url": "https://5.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://5.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 36978,
@@ -1576,6 +1756,8 @@
     {
       "name": "50",
       "url": "https://50.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://50.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 31226,
@@ -1594,6 +1776,8 @@
     {
       "name": "500",
       "url": "https://500.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://500.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43470,
@@ -1612,6 +1796,8 @@
     {
       "name": "505",
       "url": "https://505.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://505.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 35009,
@@ -1630,6 +1816,8 @@
     {
       "name": "51",
       "url": "https://51.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://51.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42667,
@@ -1648,6 +1836,8 @@
     {
       "name": "52",
       "url": "https://52.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://52.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47513,
@@ -1666,6 +1856,8 @@
     {
       "name": "53",
       "url": "https://53.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://53.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45722,
@@ -1684,6 +1876,8 @@
     {
       "name": "54",
       "url": "https://54.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://54.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 39661,
@@ -1702,6 +1896,8 @@
     {
       "name": "55",
       "url": "https://55.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://55.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44261,
@@ -1720,6 +1916,8 @@
     {
       "name": "550",
       "url": "https://550.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://550.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 36658,
@@ -1738,6 +1936,8 @@
     {
       "name": "555",
       "url": "https://555.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://555.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45223,
@@ -1756,6 +1956,8 @@
     {
       "name": "56",
       "url": "https://56.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://56.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 32000,
@@ -1774,6 +1976,8 @@
     {
       "name": "57",
       "url": "https://57.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://57.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41181,
@@ -1792,6 +1996,8 @@
     {
       "name": "58",
       "url": "https://58.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://58.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42162,
@@ -1810,6 +2016,8 @@
     {
       "name": "59",
       "url": "https://59.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://59.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49989,
@@ -1828,6 +2036,8 @@
     {
       "name": "6",
       "url": "https://6.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://6.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 29147,
@@ -1846,6 +2056,8 @@
     {
       "name": "60",
       "url": "https://60.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://60.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 51022,
@@ -1864,6 +2076,8 @@
     {
       "name": "600",
       "url": "https://600.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://600.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 56445,
@@ -1882,6 +2096,8 @@
     {
       "name": "606",
       "url": "https://606.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://606.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44652,
@@ -1900,6 +2116,8 @@
     {
       "name": "61",
       "url": "https://61.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://61.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 63626,
@@ -1918,6 +2136,8 @@
     {
       "name": "62",
       "url": "https://62.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://62.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 48497,
@@ -1936,6 +2156,8 @@
     {
       "name": "63",
       "url": "https://63.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://63.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47544,
@@ -1954,6 +2176,8 @@
     {
       "name": "64",
       "url": "https://64.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://64.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43376,
@@ -1972,6 +2196,8 @@
     {
       "name": "65",
       "url": "https://65.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://65.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49324,
@@ -1990,6 +2216,8 @@
     {
       "name": "66",
       "url": "https://66.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://66.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43404,
@@ -2008,6 +2236,8 @@
     {
       "name": "660",
       "url": "https://660.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://660.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46830,
@@ -2026,6 +2256,8 @@
     {
       "name": "666",
       "url": "https://666.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://666.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46137,
@@ -2044,6 +2276,8 @@
     {
       "name": "67",
       "url": "https://67.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://67.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46613,
@@ -2062,6 +2296,8 @@
     {
       "name": "68",
       "url": "https://68.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://68.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 31998,
@@ -2080,6 +2316,8 @@
     {
       "name": "69",
       "url": "https://69.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://69.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46453,
@@ -2098,6 +2336,8 @@
     {
       "name": "7",
       "url": "https://7.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://7.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41393,
@@ -2116,6 +2356,8 @@
     {
       "name": "70",
       "url": "https://70.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://70.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45981,
@@ -2134,6 +2376,8 @@
     {
       "name": "700",
       "url": "https://700.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://700.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43415,
@@ -2152,6 +2396,8 @@
     {
       "name": "707",
       "url": "https://707.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://707.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45059,
@@ -2170,6 +2416,8 @@
     {
       "name": "71",
       "url": "https://71.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://71.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 38291,
@@ -2188,6 +2436,8 @@
     {
       "name": "72",
       "url": "https://72.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://72.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 39518,
@@ -2206,6 +2456,8 @@
     {
       "name": "73",
       "url": "https://73.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://73.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42713,
@@ -2224,6 +2476,8 @@
     {
       "name": "74",
       "url": "https://74.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://74.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 33657,
@@ -2242,6 +2496,8 @@
     {
       "name": "75",
       "url": "https://75.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://75.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42391,
@@ -2260,6 +2516,8 @@
     {
       "name": "76",
       "url": "https://76.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://76.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 34698,
@@ -2278,6 +2536,8 @@
     {
       "name": "77",
       "url": "https://77.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://77.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43491,
@@ -2296,6 +2556,8 @@
     {
       "name": "770",
       "url": "https://770.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://770.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 56190,
@@ -2314,6 +2576,8 @@
     {
       "name": "777",
       "url": "https://777.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://777.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45770,
@@ -2332,6 +2596,8 @@
     {
       "name": "78",
       "url": "https://78.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://78.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47288,
@@ -2350,6 +2616,8 @@
     {
       "name": "79",
       "url": "https://79.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://79.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49372,
@@ -2368,6 +2636,8 @@
     {
       "name": "8",
       "url": "https://8.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://8.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49590,
@@ -2386,6 +2656,8 @@
     {
       "name": "80",
       "url": "https://80.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://80.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 39477,
@@ -2404,6 +2676,8 @@
     {
       "name": "800",
       "url": "https://800.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://800.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45581,
@@ -2422,6 +2696,8 @@
     {
       "name": "808",
       "url": "https://808.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://808.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46970,
@@ -2440,6 +2716,8 @@
     {
       "name": "81",
       "url": "https://81.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://81.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47252,
@@ -2458,6 +2736,8 @@
     {
       "name": "82",
       "url": "https://82.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://82.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41285,
@@ -2476,6 +2756,8 @@
     {
       "name": "83",
       "url": "https://83.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://83.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45483,
@@ -2494,6 +2776,8 @@
     {
       "name": "84",
       "url": "https://84.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://84.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46902,
@@ -2512,6 +2796,8 @@
     {
       "name": "85",
       "url": "https://85.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://85.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 35282,
@@ -2530,6 +2816,8 @@
     {
       "name": "86",
       "url": "https://86.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://86.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45368,
@@ -2548,6 +2836,8 @@
     {
       "name": "87",
       "url": "https://87.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://87.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 57653,
@@ -2566,6 +2856,8 @@
     {
       "name": "88",
       "url": "https://88.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://88.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 104738,
@@ -2584,6 +2876,8 @@
     {
       "name": "880",
       "url": "https://880.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://880.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43500,
@@ -2602,6 +2896,8 @@
     {
       "name": "888",
       "url": "https://888.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://888.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45001,
@@ -2620,6 +2916,8 @@
     {
       "name": "89",
       "url": "https://89.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://89.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 55146,
@@ -2638,6 +2936,8 @@
     {
       "name": "9",
       "url": "https://9.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://9.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 37995,
@@ -2656,6 +2956,8 @@
     {
       "name": "90",
       "url": "https://90.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://90.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 57288,
@@ -2674,6 +2976,8 @@
     {
       "name": "900",
       "url": "https://900.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://900.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 55486,
@@ -2692,6 +2996,8 @@
     {
       "name": "909",
       "url": "https://909.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://909.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 34446,
@@ -2710,6 +3016,8 @@
     {
       "name": "91",
       "url": "https://91.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://91.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52484,
@@ -2728,6 +3036,8 @@
     {
       "name": "92",
       "url": "https://92.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://92.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 50937,
@@ -2746,6 +3056,8 @@
     {
       "name": "93",
       "url": "https://93.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://93.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 51826,
@@ -2764,6 +3076,8 @@
     {
       "name": "94",
       "url": "https://94.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://94.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41734,
@@ -2782,6 +3096,8 @@
     {
       "name": "95",
       "url": "https://95.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://95.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52548,
@@ -2800,6 +3116,8 @@
     {
       "name": "96",
       "url": "https://96.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://96.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47323,
@@ -2818,6 +3136,8 @@
     {
       "name": "97",
       "url": "https://97.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://97.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 64342,
@@ -2836,6 +3156,8 @@
     {
       "name": "98",
       "url": "https://98.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://98.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43975,
@@ -2854,6 +3176,8 @@
     {
       "name": "99",
       "url": "https://99.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://99.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44542,
@@ -2872,6 +3196,8 @@
     {
       "name": "990",
       "url": "https://990.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://990.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45433,
@@ -2890,6 +3216,8 @@
     {
       "name": "999",
       "url": "https://999.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://999.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 41586,
@@ -2908,6 +3236,8 @@
     {
       "name": "atar",
       "url": "https://atar.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://atar.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46312,
@@ -2926,6 +3256,8 @@
     {
       "name": "car2iran",
       "url": "https://car2iran.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://car2iran.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42093,
@@ -2944,6 +3276,8 @@
     {
       "name": "car4iran",
       "url": "https://car4iran.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://car4iran.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 104855,
@@ -2962,6 +3296,8 @@
     {
       "name": "jangold",
       "url": "https://jangold.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://jangold.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47200,
@@ -2980,6 +3316,8 @@
     {
       "name": "jannesar",
       "url": "https://jannesar.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://jannesar.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 80443,
@@ -2998,6 +3336,8 @@
     {
       "name": "jantex",
       "url": "https://jantex.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://jantex.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 48962,
@@ -3016,6 +3356,8 @@
     {
       "name": "janwood",
       "url": "https://janwood.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://janwood.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 74230,
@@ -3034,6 +3376,8 @@
     {
       "name": "l",
       "url": "https://l.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://l.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44065,
@@ -3052,6 +3396,8 @@
     {
       "name": "ll",
       "url": "https://ll.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://ll.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44582,
@@ -3070,6 +3416,8 @@
     {
       "name": "lll",
       "url": "https://lll.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://lll.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 55699,
@@ -3088,6 +3436,8 @@
     {
       "name": "llll",
       "url": "https://llll.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://llll.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 80836,
@@ -3106,6 +3456,8 @@
     {
       "name": "lllll",
       "url": "https://lllll.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://lllll.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 52096,
@@ -3124,6 +3476,8 @@
     {
       "name": "nobari",
       "url": "https://nobari.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://nobari.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42006,
@@ -3142,6 +3496,8 @@
     {
       "name": "o",
       "url": "https://o.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://o.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47311,
@@ -3160,6 +3516,8 @@
     {
       "name": "oo",
       "url": "https://oo.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://oo.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47753,
@@ -3178,6 +3536,8 @@
     {
       "name": "ooo",
       "url": "https://ooo.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://ooo.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46076,
@@ -3196,6 +3556,8 @@
     {
       "name": "oooo",
       "url": "https://oooo.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://oooo.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 43367,
@@ -3214,6 +3576,8 @@
     {
       "name": "ooooo",
       "url": "https://ooooo.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://ooooo.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 44312,
@@ -3232,6 +3596,8 @@
     {
       "name": "v",
       "url": "https://v.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://v.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 35818,
@@ -3250,6 +3616,8 @@
     {
       "name": "w",
       "url": "https://w.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://w.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45837,
@@ -3268,6 +3636,8 @@
     {
       "name": "x",
       "url": "https://x.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://x.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 45134,
@@ -3286,6 +3656,8 @@
     {
       "name": "xx",
       "url": "https://xx.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://xx.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 46459,
@@ -3304,6 +3676,8 @@
     {
       "name": "xxx",
       "url": "https://xxx.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://xxx.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 49631,
@@ -3322,6 +3696,8 @@
     {
       "name": "xxxx",
       "url": "https://xxxx.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://xxxx.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 42265,
@@ -3340,6 +3716,8 @@
     {
       "name": "xxxxx",
       "url": "https://xxxxx.0l0l.workers.dev/?science-verification=20261007",
+      "nonArticle": false,
+      "baseMalformedMath": [],
       "status": 200,
       "finalUrl": "https://xxxxx.0l0l.workers.dev/?science-verification=20261007",
       "bytes": 47861,
