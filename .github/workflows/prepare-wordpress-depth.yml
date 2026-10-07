@@ -6,6 +6,7 @@ on:
       - 'scripts/prepare-wordpress-depth.mjs'
       - 'deploy/wp-depth/targets.json'
       - 'deploy/wp-depth/custom.json'
+      - 'deploy/wp-depth/overrides.json'
   workflow_dispatch:
 permissions:
   contents: write

@@ -8,7 +8,7 @@ execFileSync('git',['clone','--depth=1','https://github.com/jannesar-sciencee/ja
 fs.writeFileSync('/tmp/remaining.tar.gz',Buffer.concat(fs.readdirSync('deploy/remaining-184').filter(n=>n.startsWith('remaining184.tar.gz.part-')).sort().map(n=>fs.readFileSync('deploy/remaining-184/'+n))));
 fs.mkdirSync('/tmp/wp-worker-originals',{recursive:true});
 execFileSync('tar',['-xzf','/tmp/remaining.tar.gz','-C','/tmp/wp-worker-originals']);
-const cleanTitle=s=>s.replace(/^حسین جان[\s‌-]*نثار\s*[-–]\s*/,'').replace(/\s*[-–]\s*(تألیف|تدوین|نویسنده|مؤلف|تحقیق|پژوهش).*$/,'').trim();
+const cleanTitle=s=>s.replace(/^(?:تحلیل ساختاری|خوانش تحلیلی|مرور مسئله‌محور|بازخوانی علمی|راهنمای مفهومی):\s*/,'').replace(/^حسین جان[\s‌-]*نثار\s*[-–]\s*/,'').replace(/\s*[-–]\s*(تألیف|تدوین|نویسنده|مؤلف|تحقیق|پژوهش).*$/,'').trim();
 const plain=s=>s.replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').replace(/[\\#$*_=]/g,' ').replace(/\s+/g,' ').trim();
 const words=s=>plain(s).split(' ').length;
 const docs=[];
@@ -56,7 +56,9 @@ const paraCount=new Map();for(const d of docs)for(const s of d.sections)for(cons
 for(const d of docs)d.sections=d.sections.map(s=>({...s,body:s.body.split(/\n\n|(?<=<\/p>)/).filter(p=>(paraCount.get(plain(p))||0)<8).join('\n\n')})).filter(s=>words(s.body)>=20);
 const unique=new Map();for(const d of docs){const old=unique.get(d.title);if(!old||words(d.sections.map(s=>s.body).join(' '))>words(old.sections.map(s=>s.body).join(' ')))unique.set(d.title,d);}
 const corpus=Array.from(unique.values());
+fs.writeFileSync(path.join(out,'catalog.json'),JSON.stringify(corpus.map((d,id)=>({id,title:d.title,source:d.source,words:words(d.sections.map(s=>s.body).join(' ')),headings:d.sections.map(s=>s.heading)}))));
 const index=JSON.parse(fs.readFileSync('deploy/wp-depth/targets.json','utf8'));
+const overrides=JSON.parse(fs.readFileSync('deploy/wp-depth/overrides.json','utf8'));
 const custom=JSON.parse(fs.readFileSync('deploy/wp-depth/custom.json','utf8'));
 const manifest=[],prepared=[];
 for(const x of index){
@@ -65,7 +67,8 @@ for(const x of index){
  let body='',selected=[];
  if(custom[x.key])body=renderMarkdown(custom[x.key]);
  else{
-  const used=ranked.filter(v=>v.score>=5).slice(0,2);
+  const requested=overrides[x.key];
+  const used=requested?requested.map(q=>({d:corpus.find(d=>d.source===q),score:100})).filter(a=>a.d):ranked.filter(v=>v.score>=5).slice(0,1);
   for(const {d,score}of used){
    const candidates=d.sections.map((s,i)=>({s,i,score:overlap(tt,tokens(s.heading+' '+s.body.slice(0,500)))*3+Math.min(words(s.body),180)/180})).sort((a,b)=>b.score-a.score);
    const pick=[];let count=0;
