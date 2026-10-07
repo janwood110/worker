@@ -6,6 +6,9 @@ const {marked}=await import(pathToFileURL(path.join(renderRoot,'marked/lib/marke
 const {default:katex}=await import(pathToFileURL(path.join(renderRoot,'katex/dist/katex.mjs')).href);
 const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 let invalidMath=0;
+const correctionsFile='deploy/scientific-corrections.json';
+const corrections=fs.existsSync(correctionsFile)?JSON.parse(fs.readFileSync(correctionsFile,'utf8')):{};
+const correctBody=(text,name)=>(corrections[name]||[]).reduce((s,[from,to])=>s.replaceAll(from,to),text);
 export function renderMarkdown(markdown){
   const maths=[];
   const place=(value,display)=>{
@@ -30,14 +33,14 @@ export function enrichWorker(site,markdown){
   const anchor=before.search(/<h2\b[^>]*>\s*منابع علمی/);
   if(anchor<0)throw new Error(`Scientific references anchor absent: ${site}`);
   const added=`\n<section data-science-depth="2026-10-07" dir="rtl">\n${renderMarkdown(markdown)}\n</section>\n`;
-  const after=before.slice(0,anchor)+added+before.slice(anchor);
+  const after=correctBody(before.slice(0,anchor)+added+before.slice(anchor),path.basename(site));
   if(JSON.stringify(frozen(before))!==JSON.stringify(frozen(after)))throw new Error(`Protected content changed: ${site}`);
   fs.writeFileSync(htmlFile,after);
   const mdFile=path.join(site,'article.md');
   const original=fs.readFileSync(mdFile,'utf8');
   const actualAnchor=original.search(/\n## منابع علمی/);
   if(actualAnchor<0)throw new Error(`Markdown references anchor absent: ${site}`);
-  fs.writeFileSync(mdFile,original.slice(0,actualAnchor)+'\n\n'+markdown+'\n\n'+original.slice(actualAnchor));
+  fs.writeFileSync(mdFile,correctBody(original.slice(0,actualAnchor)+'\n\n'+markdown+'\n\n'+original.slice(actualAnchor),path.basename(site)));
 }
 if(process.argv[2]==='--render'){
   const input=JSON.parse(fs.readFileSync(0,'utf8'));
