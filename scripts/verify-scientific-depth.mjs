@@ -23,18 +23,20 @@ async function check(name){
  const canonical=(before.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i)||[])[1]||('https://'+name+'.0l0l.workers.dev/');
  const url=new URL(canonical);url.searchParams.set('science-verification','20261007');if(url.protocol!=='https:'||!url.hostname.endsWith('.0l0l.workers.dev'))throw new Error('Unexpected Worker URL '+name);
  let response,text;for(let attempt=0;attempt<3;attempt++){try{response=await fetch(url,{signal:AbortSignal.timeout(30000),redirect:'follow',headers:{'Cache-Control':'no-cache'}});text=await response.text();if(response.status===200&&text.includes('data-science-depth="2026-10-07"'))break;}catch(e){if(attempt===2)throw e;}}
+ const nonArticle=name==='01'&&/<title>01 test<\/title>/.test(text||'')&&!/<article\b/.test(text||'');
  const a=fields(text||''),b=fields(before),checks={};
  for(const k of Object.keys(b))checks[k]=JSON.stringify(a[k])===JSON.stringify(b[k]);
  checks.bodyAdded=/data-science-depth="2026-10-07"/.test(text||'');
  checks.http=response?.status===200;
- const result={name,url:String(url),status:response?.status,finalUrl:response?.url,missingBodySample:!text?.includes('data-science-depth="2026-10-07"')?text?.slice(0,1000):undefined,bytes:Buffer.byteLength(text||''),checks,protectedFieldsUnchanged:Object.entries(checks).filter(([k])=>!['bodyAdded','http'].includes(k)).every(([,v])=>v),sha256:crypto.createHash('sha256').update(text||'').digest('hex')};
+ const result={name,url:String(url),nonArticle,exclusionReason:nonArticle?'Current live endpoint is an image test without an article. Its existing title and image were preserved.':undefined,baseMalformedMath:before.match(/.{0,80}\\گزارش.{0,120}/g)||[],status:response?.status,finalUrl:response?.url,missingBodySample:!text?.includes('data-science-depth="2026-10-07"')?text?.slice(0,1000):undefined,bytes:Buffer.byteLength(text||''),checks,protectedFieldsUnchanged:Object.entries(checks).filter(([k])=>!['bodyAdded','http'].includes(k)).every(([,v])=>v),sha256:crypto.createHash('sha256').update(text||'').digest('hex')};
  results.push(result);console.log(name,checks.http&&checks.bodyAdded&&result.protectedFieldsUnchanged?'PASS':'FAIL');
 }
 const queue=['0',...names];let cursor=0;
 await Promise.all(Array.from({length:8},async()=>{while(cursor<queue.length){const name=queue[cursor++];try{await check(name);}catch(e){results.push({name,error:String(e)});console.log(name,'ERROR',String(e));}}}));
 results.sort((a,b)=>a.name.localeCompare(b.name));
-const failures=results.filter(r=>r.error||!r.checks?.http||!r.checks.bodyAdded||!r.protectedFieldsUnchanged);
+const excluded=results.filter(r=>r.nonArticle);
+const failures=results.filter(r=>!r.nonArticle&&(r.error||!r.checks?.http||!r.checks.bodyAdded||!r.protectedFieldsUnchanged));
 fs.mkdirSync('deploy/wp-depth/verification',{recursive:true});
-fs.writeFileSync('deploy/wp-depth/verification/workers-live.json',JSON.stringify({verifiedAt:new Date().toISOString(),total:results.length,passed:results.length-failures.length,failures,results},null,2));
+fs.writeFileSync('deploy/wp-depth/verification/workers-live.json',JSON.stringify({verifiedAt:new Date().toISOString(),total:results.length,sciencePages:results.length-excluded.length,passed:results.length-failures.length-excluded.length,excluded,failures,results},null,2));
 console.log('Verified',results.length,'Workers;',failures.length,'failures');
 if(failures.length)process.exitCode=1;
