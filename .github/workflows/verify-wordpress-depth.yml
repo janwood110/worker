@@ -1,0 +1,35 @@
+name: Verify published WordPress science articles
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deploy/wp-depth/verification/published-pages.json"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify all current published scientific bodies
+        id: check
+        continue-on-error: true
+        run: node scripts/verify-wordpress-depth.mjs
+      - name: Save public verification report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy/wp-depth/verification/wordpress-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record public verification of scientific WordPress pages"
+            git pull --rebase origin main
+            git push origin main
+          fi
+      - name: Require all scientific bodies to be published
+        if: steps.check.outcome != 'success'
+        run: exit 1
