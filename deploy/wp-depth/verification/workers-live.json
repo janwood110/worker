@@ -169,7 +169,9 @@
         "http": true
       },
       "protectedFieldsUnchanged": true,
-      "sha256": "b34907e9b08f811acad13b3095f692d6900f5e469ef1650a0cd82b0561f4aa28"
+      "sha256": "deb1c01adb36e1a7a8b3885abd260850191c7750b7cd9d9be48abec57a42c3c8",
+      "correctedMathNotation": true,
+      "correctionVerifiedAt": "2026-10-07T07:05:18.968Z"
     },
     {
       "name": "00989121232690",
@@ -3733,5 +3735,17 @@
       "protectedFieldsUnchanged": true,
       "sha256": "3047453c7377afbc2f2ff6c93d86119e9b682cc0d56424c41b19f5e0fb930bed"
     }
-  ]
+  ],
+  "mathCorrections": [
+    {
+      "name": "00989120074089",
+      "url": "https://00989120074089.0l0l.workers.dev/",
+      "verifiedAt": "2026-10-07T07:05:18.968Z",
+      "correction": "Repair malformed logarithm command in the scientific body only",
+      "protectedFieldsUnchanged": true,
+      "beforeSha256": "b34907e9b08f811acad13b3095f692d6900f5e469ef1650a0cd82b0561f4aa28",
+      "afterSha256": "deb1c01adb36e1a7a8b3885abd260850191c7750b7cd9d9be48abec57a42c3c8"
+    }
+  ],
+  "reportUpdatedAt": "2026-10-07T07:14:33.133Z"
 }
