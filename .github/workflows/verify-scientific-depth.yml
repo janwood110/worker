@@ -1,0 +1,36 @@
+name: Verify live scientific article bodies
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify-scientific-depth.mjs"
+      - ".github/workflows/verify-scientific-depth.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify HTTP, scientific body and exact protected fields
+        id: check
+        continue-on-error: true
+        run: node scripts/verify-scientific-depth.mjs
+      - name: Save live verification report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy/wp-depth/verification/workers-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record live verification of scientific Workers"
+            git pull --rebase origin main
+            git push origin main
+          fi
+      - name: Require all checks to pass
+        if: steps.check.outcome != 'success'
+        run: exit 1
