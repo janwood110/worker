@@ -16,17 +16,18 @@ const fields=html=>({
  scripts:html.match(/<script\b[^>]*>[\s\S]*?<\/script>/gi)||[],
  identity:(html.match(/<h2>\s*هویت نویسنده[\s\S]*?<\/article>/)||[])[0]
 });
+const removeOldNetwork=html=>{const match=/<h2>\s*شبکه ثابت\s*[0-9۰-۹]+\s*سایت\s*<\/h2>/i.exec(html);if(!match)return html;const start=match.index+match[0].length,rest=html.slice(start),ul=rest.search(/<ul\b/i),p=rest.search(/<p\b/i);let kind,open;if(ul>=0&&(p<0||ul<p)){kind='ul';open=ul;}else if(p>=0){kind='p';open=p;}else throw new Error('Missing historical network body');const close='</'+kind+'>';const end=html.toLowerCase().indexOf(close,start+open)+close.length;if(end<close.length)throw new Error('Unclosed historical network body');return html.slice(0,match.index)+html.slice(end).replace(/^\s+/,'\n');};
 const results=[];
 async function check(name){
- const before=name==='0'?zeroBefore:fs.readFileSync(path.join(root,name,'index.html'),'utf8');
+ const before=name==='0'?zeroBefore:removeOldNetwork(fs.readFileSync(path.join(root,name,'index.html'),'utf8'));
  const canonical=(before.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i)||[])[1]||('https://'+name+'.0l0l.workers.dev/');
- const url=new URL(canonical);if(url.protocol!=='https:'||!url.hostname.endsWith('.0l0l.workers.dev'))throw new Error('Unexpected Worker URL '+name);
- let response,text;for(let attempt=0;attempt<3;attempt++){try{response=await fetch(url,{signal:AbortSignal.timeout(30000),redirect:'follow'});text=await response.text();if(response.status===200)break;}catch(e){if(attempt===2)throw e;}}
+ const url=new URL(canonical);url.searchParams.set('science-verification','20261007');if(url.protocol!=='https:'||!url.hostname.endsWith('.0l0l.workers.dev'))throw new Error('Unexpected Worker URL '+name);
+ let response,text;for(let attempt=0;attempt<3;attempt++){try{response=await fetch(url,{signal:AbortSignal.timeout(30000),redirect:'follow',headers:{'Cache-Control':'no-cache'}});text=await response.text();if(response.status===200&&text.includes('data-science-depth="2026-10-07"'))break;}catch(e){if(attempt===2)throw e;}}
  const a=fields(text||''),b=fields(before),checks={};
  for(const k of Object.keys(b))checks[k]=JSON.stringify(a[k])===JSON.stringify(b[k]);
  checks.bodyAdded=/data-science-depth="2026-10-07"/.test(text||'');
  checks.http=response?.status===200;
- const result={name,url:String(url),status:response?.status,bytes:Buffer.byteLength(text||''),checks,protectedFieldsUnchanged:Object.entries(checks).filter(([k])=>!['bodyAdded','http'].includes(k)).every(([,v])=>v),sha256:crypto.createHash('sha256').update(text||'').digest('hex')};
+ const result={name,url:String(url),status:response?.status,finalUrl:response?.url,missingBodySample:!text?.includes('data-science-depth="2026-10-07"')?text?.slice(0,1000):undefined,bytes:Buffer.byteLength(text||''),checks,protectedFieldsUnchanged:Object.entries(checks).filter(([k])=>!['bodyAdded','http'].includes(k)).every(([,v])=>v),sha256:crypto.createHash('sha256').update(text||'').digest('hex')};
  results.push(result);console.log(name,checks.http&&checks.bodyAdded&&result.protectedFieldsUnchanged?'PASS':'FAIL');
 }
 const queue=['0',...names];let cursor=0;
