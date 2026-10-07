@@ -68,7 +68,7 @@ for(const x of index){
  if(custom[x.key])body=renderMarkdown(custom[x.key]);
  else{
   const requested=overrides[x.key];
-  const used=requested?requested.map(q=>({d:corpus.find(d=>d.source===q),score:100})).filter(a=>a.d):ranked.filter(v=>v.score>=5).slice(0,1);
+  const used=requested?requested.map(q=>({d:corpus.find(d=>d.source===q),score:100})).filter(a=>a.d):[];
   for(const {d,score}of used){
    const candidates=d.sections.map((s,i)=>({s,i,score:overlap(tt,tokens(s.heading+' '+s.body.slice(0,500)))*3+Math.min(words(s.body),180)/180})).sort((a,b)=>b.score-a.score);
    const pick=[];let count=0;
