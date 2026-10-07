@@ -123,6 +123,11 @@ jobs:
           console.log(`No matching network heading in ${skipped.length} Workers: ${skipped.join(", ")}`);
           console.log("article.md was not modified.");
           NODE
+      - name: Enrich scientific article bodies and verify protected content
+        run: |
+          npm install --prefix /tmp/nobari-science-render --no-audit --no-fund marked@17.0.5 katex@0.19.0
+          node scripts/enrich-science.mjs --apply /tmp/nobari185-remaining-184 deploy/remaining-184
+
       - name: Deploy only the 184 listed Workers
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
