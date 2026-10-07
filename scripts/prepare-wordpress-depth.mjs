@@ -60,6 +60,7 @@ fs.writeFileSync(path.join(out,'catalog.json'),JSON.stringify(corpus.map((d,id)=
 const index=JSON.parse(fs.readFileSync('deploy/wp-depth/targets.json','utf8'));
 const overrides=JSON.parse(fs.readFileSync('deploy/wp-depth/overrides.json','utf8'));
 const custom=JSON.parse(fs.readFileSync('deploy/wp-depth/custom.json','utf8'));
+const bridges=JSON.parse(fs.readFileSync('deploy/wp-depth/bridges.json','utf8'));
 const manifest=[],prepared=[];
 for(const x of index){
  const topic=x.title.split(' – ')[1],tt=tokens(topic);
@@ -80,12 +81,15 @@ for(const x of index){
    selected.push({title:d.title,source:d.source,score,words:count});
   }
  }
+ if(body&&bridges[x.key])body=renderMarkdown(bridges[x.key])+body;
  if(body&&!/<h1\b|<img\b|<script\b|<iframe\b|<style\b/i.test(body)){
   const markup='<!-- wp:group {"className":"science-depth-20261007","layout":{"type":"constrained","contentSize":"760px"}} -->\n<div class="wp-block-group science-depth-20261007">\n<!-- wp:html -->\n<h2>تحلیل علمی تکمیلی</h2>\n'+body+'\n<!-- /wp:html -->\n</div>\n<!-- /wp:group -->';
-  prepared.push({...x,block_markup:markup,added_words:words(body)});
+  prepared.push({...x,block_markup:markup,added_words:words(body),bridge:!!bridges[x.key]});
  }
  manifest.push({key:x.key,topic,custom:!!custom[x.key],selected,words:words(body),candidates:ranked.slice(0,8).map(a=>({title:a.d.title,source:a.d.source,score:a.score}))});
 }
+const bridgePayloads=index.filter(x=>bridges[x.key]).map(x=>({...x,block_markup:'<!-- wp:group {"className":"science-specific-20261007","layout":{"type":"constrained","contentSize":"760px"}} -->\n<div class="wp-block-group science-specific-20261007">\n<!-- wp:html -->\n<h2>کاربرد مبانی در موضوع این مقاله</h2>\n'+renderMarkdown(bridges[x.key])+'\n<!-- /wp:html -->\n</div>\n<!-- /wp:group -->',added_words:words(bridges[x.key])}));
+fs.writeFileSync(path.join(out,'bridges-payloads.json'),JSON.stringify(bridgePayloads));
 for(let i=0;i<prepared.length;i+=6)fs.writeFileSync(path.join(out,'payloads-'+String(1+i/6).padStart(2,'0')+'.json'),JSON.stringify(prepared.slice(i,i+6)));
 fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2));
 fs.writeFileSync(path.join(out,'index.json'),JSON.stringify(prepared.map(({block_markup,...rest})=>rest)));
